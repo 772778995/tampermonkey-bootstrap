@@ -1,9 +1,12 @@
 import AutoImport from 'unplugin-auto-import/vite'
+import AntdResolver from 'unplugin-auto-import-antd'
 
 export default () =>
   AutoImport({
     // targets to transform
     include: [/\.[tj]sx?$/, /\.vue$/, /\.vue\?vue/, /\.md$/],
+
+    resolvers: [AntdResolver()],
 
     // global imports to register
     imports: [
