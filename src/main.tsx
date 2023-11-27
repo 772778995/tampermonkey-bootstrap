@@ -4,7 +4,7 @@ import App from './App/App.tsx'
 import 'virtual:windi.css'
 import $ from 'jquery'
 import packageJSON from '../package.json'
-import './wired-components'
+import 'dayjs'
 
 export const rootElTag = `${packageJSON.name}`
 

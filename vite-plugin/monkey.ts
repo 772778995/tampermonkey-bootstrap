@@ -18,7 +18,9 @@ export default async () =>
           'umd/react-dom.production.min.js'
         ),
         jquery: cdn.bootcdn('jQuery', 'jquery.min.js'),
-        lodash: cdn.bootcdn('_', 'lodash.min.js')
+        lodash: cdn.bootcdn('_', 'lodash.min.js'),
+        dayjs: cdn.bootcdn('dayjs', 'dayjs.min.js'),
+        antd: cdn.bootcdn('antd', 'antd.min.js')
       }
     }
   })
