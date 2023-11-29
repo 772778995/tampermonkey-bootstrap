@@ -1,6 +1,7 @@
 import { CSSProperties, FC, MouseEventHandler, ReactNode } from 'react'
+import storage from '../utils/storage'
 
-type Offset = {
+export type Offset = {
   x: number
   y: number
 }
@@ -30,6 +31,12 @@ const FloatBtn: FC<Props> = ({
 }) => {
   /** 坐标偏移量 */
   const [offset, setOffset] = useState({ x: 0, y: 0 })
+  useEffect(() => {
+    ;(async () => {
+      const offset = await storage.getItem('offset')
+      if (offset) setOffset(offset)
+    })()
+  }, [])
 
   /** 开始拖拽的坐标 */
   const [startPoint, setStartPoint] = useState(null as null | Offset)
@@ -82,6 +89,7 @@ const FloatBtn: FC<Props> = ({
             const x = e.pageX - startPoint.x
             const y = e.pageY - startPoint.y
             setOffset({ x, y })
+            storage.setItem('offset', offset)
           }}
           // 结束拖拽
           onMouseUp={() => setStartPoint(null)}
