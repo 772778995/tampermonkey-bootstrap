@@ -33,7 +33,7 @@ const FloatBtn: FC<Props> = ({
 
   /** 开始拖拽的坐标 */
   const [startPoint, setStartPoint] = useState(null as null | Offset)
-  let setStartPointTimer = -1
+  let setStartPointTimer = -1 as any as NodeJS.Timeout
 
   /** 是否拖拽中 */
   const isDragging = useMemo(() => !!startPoint, [startPoint])
