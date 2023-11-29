@@ -1,19 +1,29 @@
-import { Dropdown } from 'antd'
-import menuProps from './menuProps'
+import { Drawer } from 'antd'
+import FloatBtn from '../components/FloatBtn'
+import packageJSON from '../../package.json'
 
 const App = () => {
+  const [isOpenDrawer, setIsOpenDrawer] = useState(false)
+
   return (
     <>
-      <Dropdown arrow menu={menuProps}>
-        <div
-          _pos="fixed top-50px right-30px"
-          _p="b-10px"
-          _text="40px"
+      {/* 悬浮按钮 */}
+      <FloatBtn _pos="top-30px right-30px" onClick={() => setIsOpenDrawer(true)}>
+        <img
+          src="https://img.wuhaochao.top/funny.png"
+          _w="50px"
+          _h="50px"
+          _border="rounded-full"
           _cursor="pointer"
-          _z="99999">
-          🧰
-        </div>
-      </Dropdown>
+          _opacity="70"
+          _hover="opacity-100"
+          _transition="opacity duration-150"
+          style={{ opacity: isOpenDrawer ? '0' : '' }}
+        />
+      </FloatBtn>
+
+      {/* 抽屉内容 */}
+      <Drawer title={packageJSON.name} open={isOpenDrawer} onClose={() => setIsOpenDrawer(false)}></Drawer>
     </>
   )
 }
