@@ -19,7 +19,7 @@ const App = () => {
           _hover="opacity-100"
           _transition="opacity duration-150"
           draggable={false}
-          style={{ opacity: isOpenDrawer ? '0' : '' }}
+          style={{ display: isOpenDrawer ? 'none' : 'block' }}
         />
       </FloatBtn>
 
