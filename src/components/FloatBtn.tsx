@@ -29,12 +29,17 @@ const FloatBtn: FC<Props> = ({
   delayTime = 150,
   onClick
 }) => {
+  const [isShow, setIsShow] = useState(false)
+
   /** 坐标偏移量 */
   const [offset, setOffset] = useState({ x: 0, y: 0 })
+
+  /** 初始化坐标 */
   useEffect(() => {
     ;(async () => {
-      const offset = await storage.getItem('offset')
-      if (offset) setOffset(offset)
+      const offset = await storage.getItem('offset') // 如果存在偏移量存储
+      if (offset) setOffset(offset) // 设置坐标
+      setIsShow(true)
     })()
   }, [])
 
@@ -55,6 +60,7 @@ const FloatBtn: FC<Props> = ({
         _active="opacity-50"
         _transition="opacity 150"
         style={{
+          display: isShow ? 'block' : 'none',
           ...wrapStyle, // 容器样式
           transform: `translate(${offset.x}px, ${offset.y}px)` // 偏移位置
         }}
