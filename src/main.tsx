@@ -10,7 +10,7 @@ export const rootElTag = `${packageJSON.name}`
 
 const [root] = $(`<${rootElTag}></${rootElTag}>`).attr('id', rootElTag)
 
-$.ready.then(() => $('html').append(root))
+$('html').append(root)
 
 ReactDOM.createRoot(root).render(
   <React.StrictMode>
