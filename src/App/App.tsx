@@ -1,16 +1,19 @@
-import { Drawer } from 'antd'
+import { message } from 'antd'
 import FloatBtn from '../components/FloatBtn'
-import packageJSON from '../../package.json'
+
+const copyAbcVal = () => {
+  $('#source').select()
+  document.execCommand('Copy')
+  message.success('复制成功')
+}
 
 const App = () => {
-  const [isOpenDrawer, setIsOpenDrawer] = useState(false)
-
   return (
     <>
       {/* 悬浮按钮 */}
-      <FloatBtn _pos="top-30px right-30px" onClick={() => setIsOpenDrawer(true)}>
+      <FloatBtn _pos="top-30px right-30px" onClick={copyAbcVal}>
         <img
-          src="https://img.wuhaochao.top/funny.png"
+          src="https://dev.midiplusedu.com/assets/music_score_editor/images/logo.svg"
           _w="50px"
           _h="50px"
           _border="rounded-full"
@@ -19,12 +22,8 @@ const App = () => {
           _hover="opacity-100"
           _transition="opacity duration-150"
           draggable={false}
-          style={{ display: isOpenDrawer ? 'none' : 'block' }}
         />
       </FloatBtn>
-
-      {/* 抽屉内容 */}
-      <Drawer title={packageJSON.name} open={isOpenDrawer} onClose={() => setIsOpenDrawer(false)}></Drawer>
     </>
   )
 }

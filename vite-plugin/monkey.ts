@@ -6,9 +6,10 @@ export default async () =>
     entry: 'src/main.tsx',
     userscript: {
       ...packageInfo,
-      icon: 'https://img.wuhaochao.top/funny.png',
+      name: packageInfo.description,
+      icon: 'https://dev.midiplusedu.com/assets/music_score_editor/images/logo.svg',
       namespace: 'npm/vite-plugin-monkey',
-      match: ['*://*/*']
+      match: ['*://*/*editor.html*', '*://*/*music_score_editor*']
     },
     build: {
       externalGlobals: {
