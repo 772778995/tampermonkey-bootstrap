@@ -9,8 +9,8 @@ dependencies:
     specifier: 5.9.0
     version: 5.9.0(react-dom@18.2.0)(react@18.2.0)
   can-can-word-bug:
-    specifier: ^0.3.2
-    version: 0.3.2
+    specifier: ^0.3.3
+    version: 0.3.3
   dayjs:
     specifier: 1.11.9
     version: 1.11.9
@@ -1567,8 +1567,8 @@ packages:
       windicss: 3.5.6
     dev: true
 
-  /can-can-word-bug@0.3.2:
-    resolution: {integrity: sha512-jYch12m43WwvzvpUDkP1hVme64yf+fgnWSdvXUvX67FE6iQvcZ0eCIwt4ckIPsAxsvvsEbmsP1Nzm3L1CHdEOg==}
+  /can-can-word-bug@0.3.3:
+    resolution: {integrity: sha512-HtAqElQvGrV2WahSv4qmiLNR4DQcH3Ol/kz6yPYkhZcoysxu0nCW8A/3IZGCdxPtMHEeZwbiijxn1OC/ADeEpA==}
     dependencies:
       '@zip.js/zip.js': 2.7.31
       blob-util: 2.0.2
