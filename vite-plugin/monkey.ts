@@ -19,7 +19,7 @@ export default async () =>
         lodash: cdn.bootcdn('_', 'lodash.min.js'),
         dayjs: cdn.bootcdn('dayjs', 'dayjs.min.js'),
         antd: cdn.bootcdn('antd', 'antd.min.js'),
-        'can-can-word-bug': cdn.unpkg('canCanWordBug', 'dist/can-can-word-bug.cjs')
+        'can-can-word-bug': cdn.unpkg('canCanWordBug', 'dist/can-can-word-bug.umd.cjs')
       }
     }
   })
