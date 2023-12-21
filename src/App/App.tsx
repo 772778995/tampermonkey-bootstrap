@@ -1,6 +1,42 @@
 import { Drawer } from 'antd'
-import FloatBtn from '../components/FloatBtn'
-import packageJSON from '../../package.json'
+import packageJSON from '~/package.json'
+import FloatBtn from '@/components/FloatBtn'
+import { proxy } from 'ajax-hook'
+import { win } from '@/utils/tampermonkey'
+
+proxy(
+  {
+    //请求发起前进入
+    onRequest: (config, handler) => {
+      console.log(`
+      config.url: ${config.url}
+      config.method: ${config.method}
+      config.body: ${config.body}
+      config.headers: ${config.headers}
+    `)
+      handler.next(config)
+    },
+    //请求发生错误时进入，比如超时；注意，不包括http状态码错误，如404仍然会认为请求成功
+    onError: (err, handler) => {
+      console.log(`
+      err.type: ${err.type}
+      err.config: ${err.config} 
+    `)
+      handler.next(err)
+    },
+    //请求成功后进入
+    onResponse: (response, handler) => {
+      console.log(`
+      response.status: ${response.status}
+      response.statusText: ${response.statusText}
+      response.headers: ${response.headers}
+      response.data: ${response.response}
+    `)
+      handler.next(response)
+    }
+  },
+  win
+)
 
 const App = () => {
   const [isOpenDrawer, setIsOpenDrawer] = useState(false)
