@@ -35,12 +35,6 @@ const App = () => {
   const [isShowDrawer, setIsShowDrawer] = useState(false)
   const [abcVal, _setAbcVal] = useState(getAbcVal())
 
-  $(document).ready(() => {
-    $('#source').on('change', function () {
-      alert(1234)
-      message.success('1234')
-    })
-  })
   const _src_change = src_change
   src_change = () => {
     _src_change()
