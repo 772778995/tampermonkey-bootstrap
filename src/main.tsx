@@ -9,7 +9,7 @@ import 'dayjs'
 
 export const rootElTag = `${packageJSON.name}`
 
-const [root] = $(`<${rootElTag}></${rootElTag}>`).attr('id', rootElTag)
+const [root] = $(`<${rootElTag}></${rootElTag}>`).addClass(rootElTag)
 
 $('html').append(root)
 
