@@ -1,5 +1,6 @@
 import { message } from 'antd'
-import { Drawer } from 'antd'
+import { Drawer, Button } from 'antd'
+import pkg from '~/package.json'
 import FloatBtn from '../components/FloatBtn'
 
 const copyAbcVal = () => {
@@ -7,6 +8,8 @@ const copyAbcVal = () => {
   document.execCommand('Copy')
   message.success('复制成功')
 }
+
+declare const changeStaffType: (a: null, b: 0 | 1 | 2) => any
 
 const App = () => {
   const [isShowDrawer, setIsShowDrawer] = useState(false)
@@ -26,8 +29,13 @@ const App = () => {
           draggable={false}
         />
       </FloatBtn>
-      <Drawer open={isShowDrawer}>
-        <div onClick={copyAbcVal}>复制 abcVal</div>
+      <Drawer className={pkg.name} open={isShowDrawer} onClose={() => setIsShowDrawer(false)}>
+        <div _flex="~ col" _space="y-10px">
+          <Button onClick={copyAbcVal}>复制 abcVal</Button>
+          <Button onClick={() => changeStaffType(null, 2)}>切换为简谱</Button>
+          <Button onClick={() => changeStaffType(null, 0)}>切换为五线谱</Button>
+          <Button onClick={() => changeStaffType(null, 1)}>切换为混谱</Button>
+        </div>
       </Drawer>
     </>
   )
