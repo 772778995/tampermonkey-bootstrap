@@ -15,6 +15,22 @@ const copyAbcVal = () => {
   message.success('复制成功')
 }
 
+const xzdsUrl = 'https://abc.ixzds.com'
+const goToXzds = async () => {
+  GM_setValue('abcVal', getAbcVal() + '')
+  window.open(xzdsUrl)
+}
+setTimeout(async () => {
+  if (location.href.includes(xzdsUrl)) {
+    const abcVal = GM_getValue('abcVal')
+    if (abcVal) {
+      $('#source').val(abcVal)
+      src_change()
+      GM_deleteValue('abcVal')
+    }
+  }
+}, 1000)
+
 const App = () => {
   const [isShowDrawer, setIsShowDrawer] = useState(false)
   const [abcVal, _setAbcVal] = useState(getAbcVal())
@@ -62,10 +78,11 @@ const App = () => {
           <Button onClick={() => changeStaffType(null, 2)}>切换为简谱</Button>
           <Button onClick={() => changeStaffType(null, 0)}>切换为五线谱</Button>
           <Button onClick={() => changeStaffType(null, 1)}>切换为混谱</Button>
+          <Button onClick={goToXzds}>跳转到小知大数</Button>
 
           <Input.TextArea
             _m="!t-auto"
-            rows={30}
+            rows={25}
             value={abcVal}
             onChange={(e) => setAbcVal(e.target.value)}></Input.TextArea>
         </div>
