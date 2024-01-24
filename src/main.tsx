@@ -4,12 +4,10 @@ import ReactDOM from 'react-dom/client'
 import App from './App/App.tsx'
 import 'virtual:windi.css'
 import $ from 'jquery'
-import packageJSON from '../package.json'
+import pkg from '../package.json'
 import 'dayjs'
 
-export const rootElTag = `${packageJSON.name}`
-
-const [root] = $(`<${rootElTag}></${rootElTag}>`).attr('id', rootElTag)
+const [root] = $(`<${pkg.name}></${pkg.name}>`).addClass(pkg.name)
 
 $('html').append(root)
 

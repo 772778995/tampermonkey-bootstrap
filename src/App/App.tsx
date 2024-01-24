@@ -1,5 +1,5 @@
 import { Drawer } from 'antd'
-import packageJSON from '~/package.json'
+import pkg from '~/package.json'
 import FloatBtn from '@/components/FloatBtn'
 import { proxy } from 'ajax-hook'
 import { win } from '@/utils/tampermonkey'
@@ -60,7 +60,11 @@ const App = () => {
       </FloatBtn>
 
       {/* 抽屉内容 */}
-      <Drawer title={packageJSON.name} open={isOpenDrawer} onClose={() => setIsOpenDrawer(false)}></Drawer>
+      <Drawer
+        title={pkg.name}
+        className={pkg.name}
+        open={isOpenDrawer}
+        onClose={() => setIsOpenDrawer(false)}></Drawer>
     </>
   )
 }
