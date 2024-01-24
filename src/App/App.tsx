@@ -1,4 +1,5 @@
 import { message } from 'antd'
+import { Drawer } from 'antd'
 import FloatBtn from '../components/FloatBtn'
 
 const copyAbcVal = () => {
@@ -8,10 +9,11 @@ const copyAbcVal = () => {
 }
 
 const App = () => {
+  const [isShowDrawer, setIsShowDrawer] = useState(false)
   return (
     <>
       {/* 悬浮按钮 */}
-      <FloatBtn _pos="top-30px right-30px" onClick={copyAbcVal}>
+      <FloatBtn _pos="top-30px right-30px" onClick={() => setIsShowDrawer(true)}>
         <img
           src="https://dev.midiplusedu.com/assets/music_score_editor/images/logo.svg"
           _w="50px"
@@ -24,6 +26,9 @@ const App = () => {
           draggable={false}
         />
       </FloatBtn>
+      <Drawer open={isShowDrawer}>
+        <div onClick={copyAbcVal}>复制 abcVal</div>
+      </Drawer>
     </>
   )
 }
