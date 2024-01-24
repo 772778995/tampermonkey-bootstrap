@@ -1,11 +1,10 @@
 {
-  "name": "tampermonkey-bootstrap",
-  "description": "自动复制打谱工具的 abcVal 到剪切板",
+  "name": "score-editor-devtool",
+  "description": "打谱开发工具库",
   "license": "MIT",
   "author": "遥遥领先！",
   "private": true,
   "version": "0.0.0",
-  "homepage": "https://github.com/772778995/tampermonkey-bootstrap",
   "type": "module",
   "scripts": {
     "dev": "vite",
