@@ -29,7 +29,11 @@ const App = () => {
           draggable={false}
         />
       </FloatBtn>
-      <Drawer className={pkg.name} open={isShowDrawer} onClose={() => setIsShowDrawer(false)}>
+      <Drawer
+        zIndex={+'9'.repeat(10)}
+        className={pkg.name}
+        open={isShowDrawer}
+        onClose={() => setIsShowDrawer(false)}>
         <div _flex="~ col" _space="y-10px">
           <Button onClick={copyAbcVal}>复制 abcVal</Button>
           <Button onClick={() => changeStaffType(null, 2)}>切换为简谱</Button>
