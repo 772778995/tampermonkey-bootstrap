@@ -188,6 +188,7 @@
     ] });
   };
   const getAbcVal = () => $("#source").val();
+  const goToDocs = () => open("https://htqzbs0x64.feishu.cn/wiki/J145w9FI4i1bE2kqjnrctxJ4nCe?table=tbl67rMGX2naczo4&view=vewNNJTfJp");
   const copyAbcVal = () => {
     $("#source").select();
     document.execCommand("Copy");
@@ -244,6 +245,7 @@
           open: isShowDrawer,
           onClose: () => setIsShowDrawer(false),
           children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { _flex: "~ col", _h: "full", _space: "y-10px", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(antd.Button, { onClick: goToDocs, children: "跳转到需求文档" }),
             /* @__PURE__ */ jsxRuntimeExports.jsx(antd.Button, { onClick: copyAbcVal, children: "复制 abcVal" }),
             /* @__PURE__ */ jsxRuntimeExports.jsx(antd.Button, { onClick: () => changeStaffType(null, 2), children: "切换为简谱" }),
             /* @__PURE__ */ jsxRuntimeExports.jsx(antd.Button, { onClick: () => changeStaffType(null, 0), children: "切换为五线谱" }),

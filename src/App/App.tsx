@@ -8,6 +8,8 @@ declare let src_change: () => any
 declare const changeStaffType: (a: null, b: 0 | 1 | 2) => any
 
 const getAbcVal = () => $('#source').val()
+const goToDocs = () =>
+  open('https://htqzbs0x64.feishu.cn/wiki/J145w9FI4i1bE2kqjnrctxJ4nCe?table=tbl67rMGX2naczo4&view=vewNNJTfJp')
 
 const copyAbcVal = () => {
   $('#source').select()
@@ -68,6 +70,7 @@ const App = () => {
         open={isShowDrawer}
         onClose={() => setIsShowDrawer(false)}>
         <div _flex="~ col" _h="full" _space="y-10px">
+          <Button onClick={goToDocs}>跳转到需求文档</Button>
           <Button onClick={copyAbcVal}>复制 abcVal</Button>
           <Button onClick={() => changeStaffType(null, 2)}>切换为简谱</Button>
           <Button onClick={() => changeStaffType(null, 0)}>切换为五线谱</Button>
