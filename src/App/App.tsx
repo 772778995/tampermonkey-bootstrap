@@ -2,8 +2,7 @@ import { Drawer } from 'antd'
 import pkg from '~/package.json'
 import FloatBtn from '@/components/FloatBtn'
 import { proxy } from 'ajax-hook'
-import { win } from '@/utils/tampermonkey'
-
+import { unsafeWindow } from '@/utils/tampermonkey'
 proxy(
   {
     //请求发起前进入
@@ -35,7 +34,7 @@ proxy(
       handler.next(response)
     }
   },
-  win
+  unsafeWindow
 )
 
 const App = () => {
