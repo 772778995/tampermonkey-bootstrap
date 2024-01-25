@@ -9,7 +9,9 @@ export default async () =>
       name: packageInfo.description,
       icon: 'https://dev.midiplusedu.com/assets/music_score_editor/images/logo.svg',
       namespace: 'npm/vite-plugin-monkey',
-      match: ['*://*/*editor.html*', '*://*/*music_score_editor*']
+      match: ['*://*/*editor.html*', '*://*/*music_score_editor*'],
+      updateURL:
+        'https://github.com/772778995/tampermonkey-bootstrap/raw/score/dist/tampermonkey-bootstrap.user.js'
     },
     build: {
       externalGlobals: {
