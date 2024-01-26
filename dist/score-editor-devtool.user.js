@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         打谱开发工具库
 // @namespace    npm/vite-plugin-monkey
-// @version      0.0.1
+// @version      0.0.2
 // @author       遥遥领先！
 // @description  打谱开发工具库
 // @license      MIT
@@ -58,14 +58,17 @@
     jsxRuntime.exports = reactJsxRuntime_production_min;
   }
   var jsxRuntimeExports = jsxRuntime.exports;
+  let win;
   if (typeof unsafeWindow !== "undefined") {
-    unsafeWindow;
+    win = unsafeWindow;
+  } else {
+    win = window;
   }
   const name = "score-editor-devtool";
   const description = "打谱开发工具库";
   const license = "MIT";
   const author = "遥遥领先！";
-  const version = "0.0.1";
+  const version = "0.0.2";
   const type = "module";
   const scripts = {
     dev: "vite",
@@ -223,6 +226,22 @@
       $("#source").val(v);
       _src_change();
     };
+    const [baseUrl, _setBaseUrl] = require$$0.useState(
+      typeof GM_getValue !== "undefined" ? GM_getValue("baseUrl") : AE.base_url
+    );
+    const setBaseUrl = (baseUrl2) => {
+      AE.base_url = baseUrl2;
+      AE.api_url = baseUrl2.replace(/\/$/, "") + "/api";
+      AE.file_url = baseUrl2.replace(/\/$/, "") + "/storage";
+      _setBaseUrl(baseUrl2);
+      if (typeof GM_setValue !== "undefined")
+        GM_setValue && GM_setValue("baseUrl", baseUrl2);
+    };
+    const [token, _setToken] = require$$0.useState(localStorage.getItem("token") || "");
+    const setToken = (token2) => {
+      _setToken(token2);
+      localStorage.setItem("token", token2);
+    };
     return /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx(FloatBtn, { _pos: "top-30px right-30px", onClick: () => setIsShowDrawer(true), children: /* @__PURE__ */ jsxRuntimeExports.jsx(
         "img",
@@ -241,6 +260,7 @@
       /* @__PURE__ */ jsxRuntimeExports.jsx(
         antd.Drawer,
         {
+          width: "500px",
           zIndex: +"9".repeat(10),
           className: packageJSON.name,
           open: isShowDrawer,
@@ -252,11 +272,13 @@
             /* @__PURE__ */ jsxRuntimeExports.jsx(antd.Button, { onClick: () => changeStaffType(null, 0), children: "切换为五线谱" }),
             /* @__PURE__ */ jsxRuntimeExports.jsx(antd.Button, { onClick: () => changeStaffType(null, 1), children: "切换为混谱" }),
             /* @__PURE__ */ jsxRuntimeExports.jsx(antd.Button, { onClick: goToXzds, children: "跳转到小知大数" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(antd.Input, { prefix: "接口根路径", value: baseUrl, onChange: (e) => setBaseUrl(e.target.value) }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(antd.Input, { prefix: "token", value: token, onChange: (e) => setToken(e.target.value) }),
             /* @__PURE__ */ jsxRuntimeExports.jsx(
               antd.Input.TextArea,
               {
                 _m: "!t-auto",
-                rows: 25,
+                rows: 20,
                 value: abcVal,
                 onChange: (e) => setAbcVal(e.target.value)
               }
@@ -267,10 +289,12 @@
     ] });
   };
   const rootElTag = `${packageJSON.name}`;
-  const [root] = $$1(`<${rootElTag}></${rootElTag}>`).addClass(rootElTag);
-  $$1("html").append(root);
-  ReactDOM.createRoot(root).render(
-    /* @__PURE__ */ jsxRuntimeExports.jsx(require$$0.StrictMode, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(App, {}) })
-  );
+  if (win.self === win.top) {
+    const [root] = $$1(`<${rootElTag}></${rootElTag}>`).addClass(rootElTag);
+    $$1("html").append(root);
+    ReactDOM.createRoot(root).render(
+      /* @__PURE__ */ jsxRuntimeExports.jsx(require$$0.StrictMode, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(App, {}) })
+    );
+  }
 
 })(React, ReactDOM, antd, canCanWordBug, jQuery);
