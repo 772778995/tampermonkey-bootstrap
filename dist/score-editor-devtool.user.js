@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         打谱开发工具库
 // @namespace    npm/vite-plugin-monkey
-// @version      0.0.2
+// @version      0.0.3
 // @author       遥遥领先！
 // @description  打谱开发工具库
 // @license      MIT
@@ -68,7 +68,7 @@
   const description = "打谱开发工具库";
   const license = "MIT";
   const author = "遥遥领先！";
-  const version = "0.0.2";
+  const version = "0.0.3";
   const type = "module";
   const scripts = {
     dev: "vite",
@@ -227,7 +227,7 @@
       _src_change();
     };
     const [baseUrl, _setBaseUrl] = require$$0.useState(
-      typeof GM_getValue !== "undefined" ? GM_getValue("baseUrl") : AE.base_url
+      typeof GM_getValue !== "undefined" ? GM_getValue("baseUrl") || AE.base_url : AE.base_url
     );
     const setBaseUrl = (baseUrl2) => {
       AE.base_url = baseUrl2;
