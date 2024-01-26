@@ -37,6 +37,7 @@ setTimeout(async () => {
 const App = () => {
   const [isShowDrawer, setIsShowDrawer] = useState(false)
   const [abcVal, _setAbcVal] = useState(getAbcVal())
+
   const _src_change = src_change
   src_change = () => {
     _src_change()
@@ -47,6 +48,7 @@ const App = () => {
     $('#source').val(v)
     _src_change()
   }
+
   const [baseUrl, _setBaseUrl] = useState(
     typeof GM_getValue !== 'undefined' ? GM_getValue('baseUrl') : AE.base_url
   )
@@ -58,6 +60,11 @@ const App = () => {
     if (typeof GM_setValue !== 'undefined') GM_setValue && GM_setValue('baseUrl', baseUrl)
   }
 
+  const [token, _setToken] = useState(localStorage.getItem('token') || '')
+  const setToken = (token: string) => {
+    _setToken(token)
+    localStorage.setItem('token', token)
+  }
   return (
     <>
       {/* 悬浮按钮 */}
@@ -88,6 +95,7 @@ const App = () => {
           <Button onClick={() => changeStaffType(null, 1)}>切换为混谱</Button>
           <Button onClick={goToXzds}>跳转到小知大数</Button>
           <Input prefix="接口根路径" value={baseUrl} onChange={(e) => setBaseUrl(e.target.value)} />
+          <Input prefix="token" value={token} onChange={(e) => setToken(e.target.value)} />
 
           <Input.TextArea
             _m="!t-auto"
