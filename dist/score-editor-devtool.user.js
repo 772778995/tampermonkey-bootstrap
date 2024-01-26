@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         打谱开发工具库
 // @namespace    npm/vite-plugin-monkey
-// @version      0.0.3
+// @version      0.0.4
 // @author       遥遥领先！
 // @description  打谱开发工具库
 // @license      MIT
@@ -68,7 +68,7 @@
   const description = "打谱开发工具库";
   const license = "MIT";
   const author = "遥遥领先！";
-  const version = "0.0.3";
+  const version = "0.0.4";
   const type = "module";
   const scripts = {
     dev: "vite",
@@ -261,6 +261,7 @@
         antd.Drawer,
         {
           width: "500px",
+          mask: false,
           zIndex: +"9".repeat(10),
           className: packageJSON.name,
           open: isShowDrawer,

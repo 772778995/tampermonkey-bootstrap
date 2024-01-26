@@ -83,6 +83,7 @@ const App = () => {
       </FloatBtn>
       <Drawer
         width="500px"
+        mask={false}
         zIndex={+'9'.repeat(10)}
         className={pkg.name}
         open={isShowDrawer}
