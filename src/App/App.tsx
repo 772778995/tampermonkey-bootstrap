@@ -3,6 +3,7 @@ import { Drawer, Button, Input } from 'antd'
 import pkg from '~/package.json'
 import FloatBtn from '../components/FloatBtn'
 
+declare const AE: any
 declare let src_change: () => any
 // declare const abc_change: () => any
 declare const changeStaffType: (a: null, b: 0 | 1 | 2) => any
@@ -36,7 +37,6 @@ setTimeout(async () => {
 const App = () => {
   const [isShowDrawer, setIsShowDrawer] = useState(false)
   const [abcVal, _setAbcVal] = useState(getAbcVal())
-
   const _src_change = src_change
   src_change = () => {
     _src_change()
@@ -46,6 +46,16 @@ const App = () => {
     _setAbcVal(v)
     $('#source').val(v)
     _src_change()
+  }
+  const [baseUrl, _setBaseUrl] = useState(
+    typeof GM_getValue !== 'undefined' ? GM_getValue('baseUrl') : AE.base_url
+  )
+  const setBaseUrl = (baseUrl: string) => {
+    AE.base_url = baseUrl
+    AE.api_url = baseUrl.replace(/\/$/, '') + '/api'
+    AE.file_url = baseUrl.replace(/\/$/, '') + '/storage'
+    _setBaseUrl(baseUrl)
+    if (typeof GM_setValue !== 'undefined') GM_setValue && GM_setValue('baseUrl', baseUrl)
   }
 
   return (
@@ -65,6 +75,7 @@ const App = () => {
         />
       </FloatBtn>
       <Drawer
+        width="500px"
         zIndex={+'9'.repeat(10)}
         className={pkg.name}
         open={isShowDrawer}
@@ -76,10 +87,11 @@ const App = () => {
           <Button onClick={() => changeStaffType(null, 0)}>切换为五线谱</Button>
           <Button onClick={() => changeStaffType(null, 1)}>切换为混谱</Button>
           <Button onClick={goToXzds}>跳转到小知大数</Button>
+          <Input prefix="接口根路径" value={baseUrl} onChange={(e) => setBaseUrl(e.target.value)} />
 
           <Input.TextArea
             _m="!t-auto"
-            rows={25}
+            rows={20}
             value={abcVal}
             onChange={(e) => setAbcVal(e.target.value)}></Input.TextArea>
         </div>
