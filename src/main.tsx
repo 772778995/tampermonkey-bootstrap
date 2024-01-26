@@ -6,15 +6,18 @@ import 'virtual:windi.css'
 import $ from 'jquery'
 import packageJSON from '../package.json'
 import 'dayjs'
+import { win } from './utils/tampermonkey'
 
 export const rootElTag = `${packageJSON.name}`
 
-const [root] = $(`<${rootElTag}></${rootElTag}>`).addClass(rootElTag)
+if (win.self === win.top) {
+  const [root] = $(`<${rootElTag}></${rootElTag}>`).addClass(rootElTag)
 
-$('html').append(root)
+  $('html').append(root)
 
-ReactDOM.createRoot(root).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-)
+  ReactDOM.createRoot(root).render(
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  )
+}
