@@ -50,7 +50,7 @@ const App = () => {
   }
 
   const [baseUrl, _setBaseUrl] = useState(
-    typeof GM_getValue !== 'undefined' ? GM_getValue('baseUrl') : AE.base_url
+    typeof GM_getValue !== 'undefined' ? GM_getValue('baseUrl') || AE.base_url : AE.base_url
   )
   const setBaseUrl = (baseUrl: string) => {
     AE.base_url = baseUrl
