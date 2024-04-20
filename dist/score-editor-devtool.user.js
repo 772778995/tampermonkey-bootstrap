@@ -1,11 +1,12 @@
 // ==UserScript==
 // @name         打谱开发工具库
 // @namespace    npm/vite-plugin-monkey
-// @version      0.0.4
+// @version      0.0.5
 // @author       遥遥领先！
 // @description  打谱开发工具库
 // @license      MIT
 // @icon         https://dev.midiplusedu.com/assets/music_score_editor/images/logo.svg
+// @downloadURL  https://github.com/772778995/tampermonkey-bootstrap/raw/score/dist/tampermonkey-bootstrap.user.js
 // @updateURL    https://github.com/772778995/tampermonkey-bootstrap/raw/score/dist/tampermonkey-bootstrap.user.js
 // @match        *://*/*editor.html*
 // @match        *://*/*music_score_editor*
@@ -24,7 +25,7 @@
 
 (o=>{if(typeof GM_addStyle=="function"){GM_addStyle(o);return}const t=document.createElement("style");t.textContent=o,document.head.append(t)})(' .score-editor-devtool [_space~=y-10px]>:not([hidden])~:not([hidden]){--tw-space-y-reverse: 0;margin-top:calc(10px * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(10px * var(--tw-space-y-reverse))}.score-editor-devtool .rounded-full,.score-editor-devtool [_border~=rounded-full]{border-radius:9999px}.score-editor-devtool [_cursor~=pointer]{cursor:pointer}.score-editor-devtool [_cursor~=move]{cursor:move}.score-editor-devtool .block{display:block}.score-editor-devtool [_flex~="~"]{display:-webkit-box;display:-ms-flexbox;display:-webkit-flex;display:flex}.score-editor-devtool [_flex~=col]{-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;-webkit-flex-direction:column;flex-direction:column}.score-editor-devtool [_h~=full]{height:100%}.score-editor-devtool [_h~=screen]{height:100vh}.score-editor-devtool [_h~="50px"]{height:50px}[_m~="!t-auto"]{margin-top:auto!important}.score-editor-devtool .opacity-100{opacity:1}.score-editor-devtool .opacity-50{opacity:.5}.score-editor-devtool [_opacity~="70"]{opacity:.7}.score-editor-devtool [_hover~=opacity-100]:hover{opacity:1}.score-editor-devtool [_active~=opacity-50]:active{opacity:.5}.score-editor-devtool .fixed,.score-editor-devtool [_pos~=fixed]{position:fixed}.score-editor-devtool .top-30px{top:30px}.score-editor-devtool .right-30px{right:30px}.score-editor-devtool .top-0{top:0}.score-editor-devtool .left-0{left:0}.score-editor-devtool [_pos~=top-30px]{top:30px}.score-editor-devtool [_pos~=right-30px]{right:30px}.score-editor-devtool [_pos~=top-0]{top:0}.score-editor-devtool [_pos~=left-0]{left:0}.score-editor-devtool [_w~=auto]{width:auto}.score-editor-devtool [_w~=screen]{width:100vw}.score-editor-devtool [_w~="50px"]{width:50px}.score-editor-devtool [_z~="99999"]{z-index:99999}.score-editor-devtool [_transition~=opacity]{-webkit-transition-property:opacity;-o-transition-property:opacity;transition-property:opacity;-webkit-transition-timing-function:cubic-bezier(.4,0,.2,1);-o-transition-timing-function:cubic-bezier(.4,0,.2,1);transition-timing-function:cubic-bezier(.4,0,.2,1);-webkit-transition-duration:.15s;-o-transition-duration:.15s;transition-duration:.15s}.score-editor-devtool .duration-150,.score-editor-devtool [_transition~=duration-150]{-webkit-transition-duration:.15s;-o-transition-duration:.15s;transition-duration:.15s} ');
 
-(function (require$$0, ReactDOM, antd, canCanWordBug, $$1) {
+(function (require$$0, ReactDOM, antd, canCanWordBug, $) {
   'use strict';
 
   var jsxRuntime = { exports: {} };
@@ -68,7 +69,7 @@
   const description = "打谱开发工具库";
   const license = "MIT";
   const author = "遥遥领先！";
-  const version = "0.0.4";
+  const version = "0.0.5";
   const type = "module";
   const scripts = {
     dev: "vite",
@@ -213,6 +214,20 @@
       }
     }
   }, 1e3);
+  const apiUrlCache = localStorage.getItem("apiUrl") || window.AE.api_url;
+  (async () => {
+    var _a;
+    $('[src="assets/music_score_editor/img/close.png"]').click();
+    if (window.API_SERVER_URL !== apiUrlCache) {
+      window.API_SERVER_URL = apiUrlCache;
+      const id = (_a = window.content_vue) == null ? void 0 : _a.m.id;
+      if (id) {
+        window.content_vue.m.id = "";
+        await canCanWordBug.delay();
+        window.content_vue.m.id = id;
+      }
+    }
+  })();
   const App = () => {
     const [isShowDrawer, setIsShowDrawer] = require$$0.useState(false);
     const [abcVal, _setAbcVal] = require$$0.useState(getAbcVal());
@@ -226,16 +241,12 @@
       $("#source").val(v);
       _src_change();
     };
-    const [baseUrl, _setBaseUrl] = require$$0.useState(
-      typeof GM_getValue !== "undefined" ? GM_getValue("baseUrl") || AE.base_url : AE.base_url
-    );
-    const setBaseUrl = (baseUrl2) => {
-      AE.base_url = baseUrl2;
-      AE.api_url = baseUrl2.replace(/\/$/, "") + "/api";
-      AE.file_url = baseUrl2.replace(/\/$/, "") + "/storage";
-      _setBaseUrl(baseUrl2);
-      if (typeof GM_setValue !== "undefined")
-        GM_setValue && GM_setValue("baseUrl", baseUrl2);
+    const [apiUrl, _setApiUrl] = require$$0.useState(apiUrlCache);
+    const setApiUrl = (apiUrl2) => {
+      window.AE.api_url = apiUrl2;
+      window.API_SERVER_URL = apiUrl2;
+      _setApiUrl(apiUrl2);
+      localStorage.setItem("apiUrl", apiUrl2);
     };
     const [token, _setToken] = require$$0.useState(localStorage.getItem("token") || "");
     const setToken = (token2) => {
@@ -246,7 +257,7 @@
       /* @__PURE__ */ jsxRuntimeExports.jsx(FloatBtn, { _pos: "top-30px right-30px", onClick: () => setIsShowDrawer(true), children: /* @__PURE__ */ jsxRuntimeExports.jsx(
         "img",
         {
-          src: "https://dev.midiplusedu.com/assets/music_score_editor/images/logo.svg",
+          src: "https://dev2.midiplusedu.com/assets/music_score_editor/images/logo.svg",
           _w: "50px",
           _h: "50px",
           _border: "rounded-full",
@@ -273,7 +284,7 @@
             /* @__PURE__ */ jsxRuntimeExports.jsx(antd.Button, { onClick: () => changeStaffType(null, 0), children: "切换为五线谱" }),
             /* @__PURE__ */ jsxRuntimeExports.jsx(antd.Button, { onClick: () => changeStaffType(null, 1), children: "切换为混谱" }),
             /* @__PURE__ */ jsxRuntimeExports.jsx(antd.Button, { onClick: goToXzds, children: "跳转到小知大数" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx(antd.Input, { prefix: "接口根路径", value: baseUrl, onChange: (e) => setBaseUrl(e.target.value) }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(antd.Input, { prefix: "接口根路径", value: apiUrl, onChange: (e) => setApiUrl(e.target.value) }),
             /* @__PURE__ */ jsxRuntimeExports.jsx(antd.Input, { prefix: "token", value: token, onChange: (e) => setToken(e.target.value) }),
             /* @__PURE__ */ jsxRuntimeExports.jsx(
               antd.Input.TextArea,
@@ -290,9 +301,9 @@
     ] });
   };
   const rootElTag = `${packageJSON.name}`;
-  if (win.self === win.top) {
-    const [root] = $$1(`<${rootElTag}></${rootElTag}>`).addClass(rootElTag);
-    $$1("html").append(root);
+  if (win.self === win.top && !location.href.includes("preview") && !location.href.includes("rhythm")) {
+    const [root] = $(`<${rootElTag}></${rootElTag}>`).addClass(rootElTag);
+    $("html").append(root);
     ReactDOM.createRoot(root).render(
       /* @__PURE__ */ jsxRuntimeExports.jsx(require$$0.StrictMode, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(App, {}) })
     );
