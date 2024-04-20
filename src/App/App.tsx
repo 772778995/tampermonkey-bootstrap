@@ -70,7 +70,7 @@ const App = () => {
       {/* 悬浮按钮 */}
       <FloatBtn _pos="top-30px right-30px" onClick={() => setIsShowDrawer(true)}>
         <img
-          src="https://dev.midiplusedu.com/assets/music_score_editor/images/logo.svg"
+          src="https://dev2.midiplusedu.com/assets/music_score_editor/images/logo.svg"
           _w="50px"
           _h="50px"
           _border="rounded-full"
