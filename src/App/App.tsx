@@ -2,8 +2,16 @@ import { message } from 'antd'
 import { Drawer, Button, Input } from 'antd'
 import pkg from '~/package.json'
 import FloatBtn from '../components/FloatBtn'
+import $ from 'jquery'
+import { delay } from 'can-can-word-bug'
 
-declare const AE: any
+declare global {
+  interface Window {
+    API_SERVER_URL: string
+    AE: any
+    content_vue: any
+  }
+}
 declare let src_change: () => any
 // declare const abc_change: () => any
 declare const changeStaffType: (a: null, b: 0 | 1 | 2) => any
@@ -34,6 +42,20 @@ setTimeout(async () => {
   }
 }, 1000)
 
+const apiUrlCache = localStorage.getItem('apiUrl') || window.AE.api_url
+;(async () => {
+  $('[src="assets/music_score_editor/img/close.png"]').click()
+  if (window.API_SERVER_URL !== apiUrlCache) {
+    window.API_SERVER_URL = apiUrlCache
+    const id = window.content_vue?.m.id
+    if (id) {
+      window.content_vue.m.id = ''
+      await delay()
+      window.content_vue.m.id = id
+    }
+  }
+})()
+
 const App = () => {
   const [isShowDrawer, setIsShowDrawer] = useState(false)
   const [abcVal, _setAbcVal] = useState(getAbcVal())
@@ -49,15 +71,12 @@ const App = () => {
     _src_change()
   }
 
-  const [baseUrl, _setBaseUrl] = useState(
-    typeof GM_getValue !== 'undefined' ? GM_getValue('baseUrl') || AE.base_url : AE.base_url
-  )
-  const setBaseUrl = (baseUrl: string) => {
-    AE.base_url = baseUrl
-    AE.api_url = baseUrl.replace(/\/$/, '') + '/api'
-    AE.file_url = baseUrl.replace(/\/$/, '') + '/storage'
-    _setBaseUrl(baseUrl)
-    if (typeof GM_setValue !== 'undefined') GM_setValue && GM_setValue('baseUrl', baseUrl)
+  const [apiUrl, _setApiUrl] = useState(apiUrlCache)
+  const setApiUrl = (apiUrl: string) => {
+    window.AE.api_url = apiUrl
+    window.API_SERVER_URL = apiUrl
+    _setApiUrl(apiUrl)
+    localStorage.setItem('apiUrl', apiUrl)
   }
 
   const [token, _setToken] = useState(localStorage.getItem('token') || '')
@@ -95,7 +114,7 @@ const App = () => {
           <Button onClick={() => changeStaffType(null, 0)}>切换为五线谱</Button>
           <Button onClick={() => changeStaffType(null, 1)}>切换为混谱</Button>
           <Button onClick={goToXzds}>跳转到小知大数</Button>
-          <Input prefix="接口根路径" value={baseUrl} onChange={(e) => setBaseUrl(e.target.value)} />
+          <Input prefix="接口根路径" value={apiUrl} onChange={(e) => setApiUrl(e.target.value)} />
           <Input prefix="token" value={token} onChange={(e) => setToken(e.target.value)} />
 
           <Input.TextArea
