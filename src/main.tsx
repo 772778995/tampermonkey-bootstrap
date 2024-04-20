@@ -10,7 +10,7 @@ import { win } from './utils/tampermonkey'
 
 export const rootElTag = `${packageJSON.name}`
 
-if (win.self === win.top) {
+if (win.self === win.top && !location.href.includes('preview') && !location.href.includes('rhythm')) {
   const [root] = $(`<${rootElTag}></${rootElTag}>`).addClass(rootElTag)
 
   $('html').append(root)
