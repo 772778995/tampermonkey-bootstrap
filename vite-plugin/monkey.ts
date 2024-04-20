@@ -1,6 +1,9 @@
 import monkey, { cdn } from 'vite-plugin-monkey'
 import packageInfo from '../package.json'
 
+const scriptURL =
+  'https://github.com/772778995/tampermonkey-bootstrap/raw/score/dist/tampermonkey-bootstrap.user.js'
+
 export default async () =>
   monkey({
     entry: 'src/main.tsx',
@@ -10,8 +13,8 @@ export default async () =>
       icon: 'https://dev.midiplusedu.com/assets/music_score_editor/images/logo.svg',
       namespace: 'npm/vite-plugin-monkey',
       match: ['*://*/*editor.html*', '*://*/*music_score_editor*'],
-      updateURL:
-        'https://github.com/772778995/tampermonkey-bootstrap/raw/score/dist/tampermonkey-bootstrap.user.js'
+      updateURL: scriptURL,
+      downloadURL: scriptURL
     },
     build: {
       externalGlobals: {
