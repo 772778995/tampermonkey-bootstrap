@@ -209,7 +209,7 @@
       const abcVal = GM_getValue("abcVal");
       if (abcVal) {
         $("#source").val(abcVal);
-        src_change();
+        window.src_change();
         GM_deleteValue("abcVal");
       }
     }
@@ -231,8 +231,8 @@
   const App = () => {
     const [isShowDrawer, setIsShowDrawer] = require$$0.useState(false);
     const [abcVal, _setAbcVal] = require$$0.useState(getAbcVal());
-    const _src_change = src_change;
-    src_change = () => {
+    const _src_change = window.src_change;
+    window.src_change = () => {
       _src_change();
       _setAbcVal(getAbcVal());
     };
@@ -280,9 +280,9 @@
           children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { _flex: "~ col", _h: "full", _space: "y-10px", children: [
             /* @__PURE__ */ jsxRuntimeExports.jsx(antd.Button, { onClick: goToDocs, children: "跳转到需求文档" }),
             /* @__PURE__ */ jsxRuntimeExports.jsx(antd.Button, { onClick: copyAbcVal, children: "复制 abcVal" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx(antd.Button, { onClick: () => changeStaffType(null, 2), children: "切换为简谱" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx(antd.Button, { onClick: () => changeStaffType(null, 0), children: "切换为五线谱" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx(antd.Button, { onClick: () => changeStaffType(null, 1), children: "切换为混谱" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(antd.Button, { onClick: () => window.changeStaffType(null, 2), children: "切换为简谱" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(antd.Button, { onClick: () => window.changeStaffType(null, 0), children: "切换为五线谱" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(antd.Button, { onClick: () => window.changeStaffType(null, 1), children: "切换为混谱" }),
             /* @__PURE__ */ jsxRuntimeExports.jsx(antd.Button, { onClick: goToXzds, children: "跳转到小知大数" }),
             /* @__PURE__ */ jsxRuntimeExports.jsx(antd.Input, { prefix: "接口根路径", value: apiUrl, onChange: (e) => setApiUrl(e.target.value) }),
             /* @__PURE__ */ jsxRuntimeExports.jsx(antd.Input, { prefix: "token", value: token, onChange: (e) => setToken(e.target.value) }),
