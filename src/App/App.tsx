@@ -10,11 +10,10 @@ declare global {
     API_SERVER_URL: string
     AE: any
     content_vue: any
+    src_change: () => any
+    changeStaffType: (a: null, b: 0 | 1 | 2) => any
   }
 }
-declare let src_change: () => any
-// declare const abc_change: () => any
-declare const changeStaffType: (a: null, b: 0 | 1 | 2) => any
 
 const getAbcVal = () => $('#source').val()
 const goToDocs = () =>
@@ -36,7 +35,7 @@ setTimeout(async () => {
     const abcVal = GM_getValue('abcVal')
     if (abcVal) {
       $('#source').val(abcVal)
-      src_change()
+      window.src_change()
       GM_deleteValue('abcVal')
     }
   }
@@ -60,8 +59,8 @@ const App = () => {
   const [isShowDrawer, setIsShowDrawer] = useState(false)
   const [abcVal, _setAbcVal] = useState(getAbcVal())
 
-  const _src_change = src_change
-  src_change = () => {
+  const _src_change = window.src_change
+  window.src_change = () => {
     _src_change()
     _setAbcVal(getAbcVal())
   }
@@ -110,9 +109,9 @@ const App = () => {
         <div _flex="~ col" _h="full" _space="y-10px">
           <Button onClick={goToDocs}>跳转到需求文档</Button>
           <Button onClick={copyAbcVal}>复制 abcVal</Button>
-          <Button onClick={() => changeStaffType(null, 2)}>切换为简谱</Button>
-          <Button onClick={() => changeStaffType(null, 0)}>切换为五线谱</Button>
-          <Button onClick={() => changeStaffType(null, 1)}>切换为混谱</Button>
+          <Button onClick={() => window.changeStaffType(null, 2)}>切换为简谱</Button>
+          <Button onClick={() => window.changeStaffType(null, 0)}>切换为五线谱</Button>
+          <Button onClick={() => window.changeStaffType(null, 1)}>切换为混谱</Button>
           <Button onClick={goToXzds}>跳转到小知大数</Button>
           <Input prefix="接口根路径" value={apiUrl} onChange={(e) => setApiUrl(e.target.value)} />
           <Input prefix="token" value={token} onChange={(e) => setToken(e.target.value)} />
