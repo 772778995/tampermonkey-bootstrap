@@ -1,13 +1,13 @@
 // ==UserScript==
 // @name         打谱开发工具库
 // @namespace    npm/vite-plugin-monkey
-// @version      0.0.8
+// @version      0.0.9
 // @author       遥遥领先！
 // @description  打谱开发工具库
 // @license      MIT
 // @icon         https://dev.midiplusedu.com/assets/music_score_editor/images/logo.svg
-// @downloadURL  https://github.com/772778995/tampermonkey-bootstrap/raw/score/dist/tampermonkey-bootstrap.user.js
-// @updateURL    https://github.com/772778995/tampermonkey-bootstrap/raw/score/dist/tampermonkey-bootstrap.user.js
+// @downloadURL  https://github.com/772778995/tampermonkey-bootstrap/raw/socre/dist/score-editor-devtool.user.js
+// @updateURL    https://github.com/772778995/tampermonkey-bootstrap/raw/socre/dist/score-editor-devtool.user.js
 // @match        *://*/*editor.html*
 // @match        *://*/*music_score_editor*
 // @require      https://cdn.bootcdn.net/ajax/libs/react/18.2.0/umd/react.production.min.js
@@ -70,7 +70,7 @@
   const description = "打谱开发工具库";
   const license = "MIT";
   const author = "遥遥领先！";
-  const version = "0.0.8";
+  const version = "0.0.9";
   const type = "module";
   const scripts = {
     dev: "vite",
