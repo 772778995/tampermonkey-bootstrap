@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         打谱开发工具库
 // @namespace    npm/vite-plugin-monkey
-// @version      0.0.7
+// @version      0.0.8
 // @author       遥遥领先！
 // @description  打谱开发工具库
 // @license      MIT
@@ -28,6 +28,7 @@
 (function (require$$0, ReactDOM, antd, canCanWordBug, $) {
   'use strict';
 
+  var _a;
   var jsxRuntime = { exports: {} };
   var reactJsxRuntime_production_min = {};
   /**
@@ -69,7 +70,7 @@
   const description = "打谱开发工具库";
   const license = "MIT";
   const author = "遥遥领先！";
-  const version = "0.0.7";
+  const version = "0.0.8";
   const type = "module";
   const scripts = {
     dev: "vite",
@@ -193,7 +194,7 @@
     ] });
   };
   const getAbcVal = () => $("#source").val();
-  const goToDocs = () => open("https://htqzbs0x64.feishu.cn/wiki/J145w9FI4i1bE2kqjnrctxJ4nCe?table=tbl67rMGX2naczo4&view=vewNNJTfJp");
+  const goToDocs = () => open("https://htqzbs0x64.feishu.cn/wiki/J145w9FI4i1bE2kqjnrctxJ4nCe?table=tblHema1kVKaR9Rp&view=vewNNJTfJp");
   const copyAbcVal = () => {
     $("#source").select();
     document.execCommand("Copy");
@@ -209,18 +210,21 @@
       const abcVal = GM_getValue("abcVal");
       if (abcVal) {
         $("#source").val(abcVal);
-        window.src_change();
+        src_change();
         GM_deleteValue("abcVal");
       }
     }
   }, 1e3);
-  const apiUrlCache = localStorage.getItem("apiUrl") || window.AE.api_url;
+  const apiUrlCache = localStorage.getItem("apiUrl") || ((_a = window.AE) == null ? void 0 : _a.api_url);
+  const tokenCache = localStorage.getItem("token2") || "";
   (async () => {
-    var _a;
+    var _a2;
+    if (tokenCache)
+      localStorage.setItem("token", tokenCache);
     $('[src="assets/music_score_editor/img/close.png"]').click();
     if (window.API_SERVER_URL !== apiUrlCache) {
       window.API_SERVER_URL = apiUrlCache;
-      const id = (_a = window.content_vue) == null ? void 0 : _a.m.id;
+      const id = (_a2 = window.content_vue) == null ? void 0 : _a2.m.id;
       if (id) {
         window.content_vue.m.id = "";
         await canCanWordBug.delay();
@@ -231,8 +235,8 @@
   const App = () => {
     const [isShowDrawer, setIsShowDrawer] = require$$0.useState(false);
     const [abcVal, _setAbcVal] = require$$0.useState(getAbcVal());
-    const _src_change = window.src_change;
-    window.src_change = () => {
+    const _src_change = src_change;
+    src_change = () => {
       _src_change();
       _setAbcVal(getAbcVal());
     };
@@ -248,10 +252,11 @@
       _setApiUrl(apiUrl2);
       localStorage.setItem("apiUrl", apiUrl2);
     };
-    const [token, _setToken] = require$$0.useState(localStorage.getItem("token") || "");
+    const [token, _setToken] = require$$0.useState(tokenCache);
     const setToken = (token2) => {
       _setToken(token2);
       localStorage.setItem("token", token2);
+      localStorage.setItem("token2", token2);
     };
     return /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx(FloatBtn, { _pos: "top-30px right-30px", onClick: () => setIsShowDrawer(true), children: /* @__PURE__ */ jsxRuntimeExports.jsx(
@@ -280,9 +285,9 @@
           children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { _flex: "~ col", _h: "full", _space: "y-10px", children: [
             /* @__PURE__ */ jsxRuntimeExports.jsx(antd.Button, { onClick: goToDocs, children: "跳转到需求文档" }),
             /* @__PURE__ */ jsxRuntimeExports.jsx(antd.Button, { onClick: copyAbcVal, children: "复制 abcVal" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx(antd.Button, { onClick: () => window.changeStaffType(null, 2), children: "切换为简谱" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx(antd.Button, { onClick: () => window.changeStaffType(null, 0), children: "切换为五线谱" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx(antd.Button, { onClick: () => window.changeStaffType(null, 1), children: "切换为混谱" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(antd.Button, { onClick: () => changeStaffType(null, 2), children: "切换为简谱" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(antd.Button, { onClick: () => changeStaffType(null, 0), children: "切换为五线谱" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(antd.Button, { onClick: () => changeStaffType(null, 1), children: "切换为混谱" }),
             /* @__PURE__ */ jsxRuntimeExports.jsx(antd.Button, { onClick: goToXzds, children: "跳转到小知大数" }),
             /* @__PURE__ */ jsxRuntimeExports.jsx(antd.Input, { prefix: "接口根路径", value: apiUrl, onChange: (e) => setApiUrl(e.target.value) }),
             /* @__PURE__ */ jsxRuntimeExports.jsx(antd.Input, { prefix: "token", value: token, onChange: (e) => setToken(e.target.value) }),
