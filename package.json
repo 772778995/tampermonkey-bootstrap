@@ -15,6 +15,7 @@
   "dependencies": {
     "ajax-hook": "^3.0.3",
     "antd": "5.9.0",
+    "axios": "^1.6.8",
     "can-can-word-bug": "^0.3.4",
     "dayjs": "1.11.9",
     "jquery": "^3.7.1",
