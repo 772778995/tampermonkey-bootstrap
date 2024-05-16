@@ -4,6 +4,7 @@ import pkg from '~/package.json'
 import FloatBtn from '../components/FloatBtn'
 import $ from 'jquery'
 import { delay } from 'can-can-word-bug'
+import { win } from '../utils/tampermonkey'
 
 declare global {
   interface Window {
@@ -42,18 +43,18 @@ setTimeout(async () => {
   }
 }, 1000)
 
-const apiUrlCache = localStorage.getItem('apiUrl') || unsafeWindow.AE?.api_url
+const apiUrlCache = localStorage.getItem('apiUrl') || win.AE?.api_url
 const tokenCache = localStorage.getItem('token2') || ''
 ;(async () => {
   if (tokenCache) localStorage.setItem('token', tokenCache)
   $('[src="assets/music_score_editor/img/close.png"]').click()
-  if (unsafeWindow.API_SERVER_URL !== apiUrlCache) {
-    unsafeWindow.API_SERVER_URL = apiUrlCache
-    const id = unsafeWindow.content_vue?.m.id
+  if (win.API_SERVER_URL !== apiUrlCache) {
+    win.API_SERVER_URL = apiUrlCache
+    const id = win.content_vue?.m.id
     if (id) {
-      unsafeWindow.content_vue.m.id = ''
+      win.content_vue.m.id = ''
       await delay()
-      unsafeWindow.content_vue.m.id = id
+      win.content_vue.m.id = id
     }
   }
 })()
@@ -75,8 +76,8 @@ const App = () => {
 
   const [apiUrl, _setApiUrl] = useState(apiUrlCache)
   const setApiUrl = (apiUrl: string) => {
-    unsafeWindow.AE.api_url = apiUrl
-    unsafeWindow.API_SERVER_URL = apiUrl
+    win.AE.api_url = apiUrl
+    win.API_SERVER_URL = apiUrl
     _setApiUrl(apiUrl)
     localStorage.setItem('apiUrl', apiUrl)
   }
