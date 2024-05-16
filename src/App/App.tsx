@@ -42,18 +42,18 @@ setTimeout(async () => {
   }
 }, 1000)
 
-const apiUrlCache = localStorage.getItem('apiUrl') || window.AE?.api_url
+const apiUrlCache = localStorage.getItem('apiUrl') || unsafeWindow.AE?.api_url
 const tokenCache = localStorage.getItem('token2') || ''
 ;(async () => {
   if (tokenCache) localStorage.setItem('token', tokenCache)
   $('[src="assets/music_score_editor/img/close.png"]').click()
-  if (window.API_SERVER_URL !== apiUrlCache) {
-    window.API_SERVER_URL = apiUrlCache
-    const id = window.content_vue?.m.id
+  if (unsafeWindow.API_SERVER_URL !== apiUrlCache) {
+    unsafeWindow.API_SERVER_URL = apiUrlCache
+    const id = unsafeWindow.content_vue?.m.id
     if (id) {
-      window.content_vue.m.id = ''
+      unsafeWindow.content_vue.m.id = ''
       await delay()
-      window.content_vue.m.id = id
+      unsafeWindow.content_vue.m.id = id
     }
   }
 })()
@@ -75,8 +75,8 @@ const App = () => {
 
   const [apiUrl, _setApiUrl] = useState(apiUrlCache)
   const setApiUrl = (apiUrl: string) => {
-    window.AE.api_url = apiUrl
-    window.API_SERVER_URL = apiUrl
+    unsafeWindow.AE.api_url = apiUrl
+    unsafeWindow.API_SERVER_URL = apiUrl
     _setApiUrl(apiUrl)
     localStorage.setItem('apiUrl', apiUrl)
   }
