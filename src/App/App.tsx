@@ -71,20 +71,6 @@ const App = () => {
     _src_change()
   }
 
-  const [apiUrl, _setApiUrl] = useState(apiUrlCache)
-  const setApiUrl = (apiUrl: string) => {
-    win.AE.api_url = apiUrl
-    win.API_SERVER_URL = apiUrl
-    _setApiUrl(apiUrl)
-    localStorage.setItem('apiUrl', apiUrl)
-  }
-
-  const [token, _setToken] = useState(tokenCache)
-  const setToken = (token: string) => {
-    _setToken(token)
-    localStorage.setItem('token', token)
-    localStorage.setItem('token2', token)
-  }
   return (
     <>
       {/* 悬浮按钮 */}

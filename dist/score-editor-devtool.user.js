@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         打谱开发工具库
 // @namespace    npm/vite-plugin-monkey
-// @version      0.0.10
+// @version      0.0.11
 // @author       遥遥领先！
 // @description  打谱开发工具库
 // @license      MIT
@@ -28,7 +28,6 @@
 (function (require$$0, ReactDOM, antd, canCanWordBug, $) {
   'use strict';
 
-  var _a;
   var jsxRuntime = { exports: {} };
   var reactJsxRuntime_production_min = {};
   /**
@@ -70,7 +69,7 @@
   const description = "打谱开发工具库";
   const license = "MIT";
   const author = "遥遥领先！";
-  const version = "0.0.10";
+  const version = "0.0.11";
   const type = "module";
   const scripts = {
     dev: "vite",
@@ -216,16 +215,13 @@
       }
     }
   }, 1e3);
-  const apiUrlCache = localStorage.getItem("apiUrl") || ((_a = win.AE) == null ? void 0 : _a.api_url);
-  const tokenCache = localStorage.getItem("token2") || "";
+  const DEV_API_URL = "https://dev2.midiplusedu.com/api";
   (async () => {
-    var _a2;
-    if (tokenCache)
-      localStorage.setItem("token", tokenCache);
+    var _a;
     $('[src="assets/music_score_editor/img/close.png"]').click();
-    if (win.API_SERVER_URL !== apiUrlCache) {
-      win.API_SERVER_URL = apiUrlCache;
-      const id = (_a2 = win.content_vue) == null ? void 0 : _a2.m.id;
+    if (win.API_SERVER_URL !== DEV_API_URL) {
+      win.API_SERVER_URL = DEV_API_URL;
+      const id = (_a = win.content_vue) == null ? void 0 : _a.m.id;
       if (id) {
         win.content_vue.m.id = "";
         await canCanWordBug.delay();
@@ -245,19 +241,6 @@
       _setAbcVal(v);
       $("#source").val(v);
       _src_change();
-    };
-    const [apiUrl, _setApiUrl] = require$$0.useState(apiUrlCache);
-    const setApiUrl = (apiUrl2) => {
-      win.AE.api_url = apiUrl2;
-      win.API_SERVER_URL = apiUrl2;
-      _setApiUrl(apiUrl2);
-      localStorage.setItem("apiUrl", apiUrl2);
-    };
-    const [token, _setToken] = require$$0.useState(tokenCache);
-    const setToken = (token2) => {
-      _setToken(token2);
-      localStorage.setItem("token", token2);
-      localStorage.setItem("token2", token2);
     };
     return /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx(FloatBtn, { _pos: "top-30px right-30px", onClick: () => setIsShowDrawer(true), children: /* @__PURE__ */ jsxRuntimeExports.jsx(
@@ -290,8 +273,6 @@
             /* @__PURE__ */ jsxRuntimeExports.jsx(antd.Button, { onClick: () => changeStaffType(null, 0), children: "切换为五线谱" }),
             /* @__PURE__ */ jsxRuntimeExports.jsx(antd.Button, { onClick: () => changeStaffType(null, 1), children: "切换为混谱" }),
             /* @__PURE__ */ jsxRuntimeExports.jsx(antd.Button, { onClick: goToXzds, children: "跳转到小知大数" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx(antd.Input, { prefix: "接口根路径", value: apiUrl, onChange: (e) => setApiUrl(e.target.value) }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx(antd.Input, { prefix: "token", value: token, onChange: (e) => setToken(e.target.value) }),
             /* @__PURE__ */ jsxRuntimeExports.jsx(
               antd.Input.TextArea,
               {
