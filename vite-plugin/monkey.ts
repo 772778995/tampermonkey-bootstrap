@@ -21,6 +21,7 @@ export default async () =>
         react: cdn.bootcdn('React', 'umd/react.production.min.js'),
         'react-dom/client': cdn.bootcdn('ReactDOM', 'umd/react-dom.production.min.js'),
         jquery: cdn.bootcdn('jQuery', 'jquery.min.js'),
+        axios: cdn.bootcdn('axios', 'axios.min.js'),
         lodash: cdn.bootcdn('_', 'lodash.min.js'),
         dayjs: cdn.bootcdn('dayjs', 'dayjs.min.js'),
         antd: cdn.bootcdn('antd', 'antd.min.js'),
