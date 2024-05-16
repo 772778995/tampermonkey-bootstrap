@@ -42,14 +42,11 @@ setTimeout(async () => {
     }
   }
 }, 1000)
-
-const apiUrlCache = localStorage.getItem('apiUrl') || win.AE?.api_url
-const tokenCache = localStorage.getItem('token2') || ''
+const DEV_API_URL = 'https://dev2.midiplusedu.com/api'
 ;(async () => {
-  if (tokenCache) localStorage.setItem('token', tokenCache)
   $('[src="assets/music_score_editor/img/close.png"]').click()
-  if (win.API_SERVER_URL !== apiUrlCache) {
-    win.API_SERVER_URL = apiUrlCache
+  if (win.API_SERVER_URL !== DEV_API_URL) {
+    win.API_SERVER_URL = DEV_API_URL
     const id = win.content_vue?.m.id
     if (id) {
       win.content_vue.m.id = ''
@@ -118,8 +115,6 @@ const App = () => {
           <Button onClick={() => changeStaffType(null, 0)}>切换为五线谱</Button>
           <Button onClick={() => changeStaffType(null, 1)}>切换为混谱</Button>
           <Button onClick={goToXzds}>跳转到小知大数</Button>
-          <Input prefix="接口根路径" value={apiUrl} onChange={(e) => setApiUrl(e.target.value)} />
-          <Input prefix="token" value={token} onChange={(e) => setToken(e.target.value)} />
 
           <Input.TextArea
             _m="!t-auto"
