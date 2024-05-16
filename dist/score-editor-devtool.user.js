@@ -1,13 +1,13 @@
 // ==UserScript==
 // @name         打谱开发工具库
 // @namespace    npm/vite-plugin-monkey
-// @version      0.0.9
+// @version      0.0.10
 // @author       遥遥领先！
 // @description  打谱开发工具库
 // @license      MIT
 // @icon         https://dev.midiplusedu.com/assets/music_score_editor/images/logo.svg
-// @downloadURL  https://github.com/772778995/tampermonkey-bootstrap/raw/socre/dist/score-editor-devtool.user.js
-// @updateURL    https://github.com/772778995/tampermonkey-bootstrap/raw/socre/dist/score-editor-devtool.user.js
+// @downloadURL  https://gitee.com/wu-hao-chao/tampermonkey-bootstrap/raw/socre/dist/score-editor-devtool.user.js
+// @updateURL    https://gitee.com/wu-hao-chao/tampermonkey-bootstrap/raw/socre/dist/score-editor-devtool.user.js
 // @match        *://*/*editor.html*
 // @match        *://*/*music_score_editor*
 // @require      https://cdn.bootcdn.net/ajax/libs/react/18.2.0/umd/react.production.min.js
@@ -70,7 +70,7 @@
   const description = "打谱开发工具库";
   const license = "MIT";
   const author = "遥遥领先！";
-  const version = "0.0.9";
+  const version = "0.0.10";
   const type = "module";
   const scripts = {
     dev: "vite",
@@ -81,6 +81,7 @@
   const dependencies = {
     "ajax-hook": "^3.0.3",
     antd: "5.9.0",
+    axios: "^1.6.8",
     "can-can-word-bug": "^0.3.4",
     dayjs: "1.11.9",
     jquery: "^3.7.1",
@@ -215,20 +216,20 @@
       }
     }
   }, 1e3);
-  const apiUrlCache = localStorage.getItem("apiUrl") || ((_a = window.AE) == null ? void 0 : _a.api_url);
+  const apiUrlCache = localStorage.getItem("apiUrl") || ((_a = win.AE) == null ? void 0 : _a.api_url);
   const tokenCache = localStorage.getItem("token2") || "";
   (async () => {
     var _a2;
     if (tokenCache)
       localStorage.setItem("token", tokenCache);
     $('[src="assets/music_score_editor/img/close.png"]').click();
-    if (window.API_SERVER_URL !== apiUrlCache) {
-      window.API_SERVER_URL = apiUrlCache;
-      const id = (_a2 = window.content_vue) == null ? void 0 : _a2.m.id;
+    if (win.API_SERVER_URL !== apiUrlCache) {
+      win.API_SERVER_URL = apiUrlCache;
+      const id = (_a2 = win.content_vue) == null ? void 0 : _a2.m.id;
       if (id) {
-        window.content_vue.m.id = "";
+        win.content_vue.m.id = "";
         await canCanWordBug.delay();
-        window.content_vue.m.id = id;
+        win.content_vue.m.id = id;
       }
     }
   })();
@@ -247,8 +248,8 @@
     };
     const [apiUrl, _setApiUrl] = require$$0.useState(apiUrlCache);
     const setApiUrl = (apiUrl2) => {
-      window.AE.api_url = apiUrl2;
-      window.API_SERVER_URL = apiUrl2;
+      win.AE.api_url = apiUrl2;
+      win.API_SERVER_URL = apiUrl2;
       _setApiUrl(apiUrl2);
       localStorage.setItem("apiUrl", apiUrl2);
     };

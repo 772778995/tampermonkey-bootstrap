@@ -2,7 +2,7 @@ import monkey, { cdn } from 'vite-plugin-monkey'
 import packageInfo from '../package.json'
 
 const scriptURL =
-  'https://github.com/772778995/tampermonkey-bootstrap/raw/socre/dist/score-editor-devtool.user.js'
+  'https://gitee.com/wu-hao-chao/tampermonkey-bootstrap/raw/socre/dist/score-editor-devtool.user.js'
 
 export default async () =>
   monkey({
