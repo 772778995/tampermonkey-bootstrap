@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         打谱开发工具库
 // @namespace    npm/vite-plugin-monkey
-// @version      0.0.11
+// @version      0.0.12
 // @author       遥遥领先！
 // @description  打谱开发工具库
 // @license      MIT
@@ -69,7 +69,7 @@
   const description = "打谱开发工具库";
   const license = "MIT";
   const author = "遥遥领先！";
-  const version = "0.0.11";
+  const version = "0.0.12";
   const type = "module";
   const scripts = {
     dev: "vite",
