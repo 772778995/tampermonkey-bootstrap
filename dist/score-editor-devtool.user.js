@@ -15,7 +15,7 @@
 // @require      https://cdn.bootcdn.net/ajax/libs/jquery/3.7.1/jquery.min.js
 // @require      https://cdn.bootcdn.net/ajax/libs/dayjs/1.11.9/dayjs.min.js
 // @require      https://cdn.bootcdn.net/ajax/libs/antd/5.9.0/antd.min.js
-// @require      https://registry.npmmirror.com/can-can-word-bug/0.3.4/files/dist/can-can-word-bug.umd.cjs
+// @require      https://unpkg.com/can-can-word-bug@0.3.4/dist/can-can-word-bug.umd.cjs
 // @grant        GM_addStyle
 // @grant        GM_deleteValue
 // @grant        GM_getValue
