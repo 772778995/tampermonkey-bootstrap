@@ -6,7 +6,7 @@ export default async () =>
     entry: 'src/main.tsx',
     userscript: {
       ...packageInfo,
-      icon: 'https://img.wuhaochao.top/funny.png',
+      icon: 'https://blog.5i996.icu/logo.png',
       namespace: 'npm/vite-plugin-monkey',
       match: ['*://*/*']
     },

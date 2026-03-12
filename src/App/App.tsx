@@ -45,7 +45,7 @@ const App = () => {
       {/* 悬浮按钮 */}
       <FloatBtn _pos="top-30px right-30px" onClick={() => setIsOpenDrawer(true)}>
         <img
-          src="https://img.wuhaochao.top/funny.png"
+          src="https://blog.5i996.icu/logo.png"
           _w="50px"
           _h="50px"
           _border="rounded-full"
